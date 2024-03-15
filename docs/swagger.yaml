@@ -1,0 +1,70 @@
+definitions:
+  main.Calls:
+    properties:
+      id:
+        type: string
+      numberOfCalls:
+        type: integer
+    type: object
+info:
+  contact: {}
+paths:
+  /getNumCalls:
+    get:
+      description: Get number of calls
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/main.Calls'
+            type: array
+      summary: Get number of calls
+      tags:
+      - calls
+  /incrementNumCalls:
+    post:
+      description: Increment number of calls
+      parameters:
+      - description: Company id
+        in: query
+        name: company
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.Calls'
+      summary: Increment number of calls
+      tags:
+      - calls
+  /setNumCalls:
+    post:
+      description: Set number of calls
+      parameters:
+      - description: Company id
+        in: query
+        name: company
+        required: true
+        type: string
+      - description: Number of calls
+        in: query
+        name: numberOfCalls
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.Calls'
+      summary: Set number of calls
+      tags:
+      - calls
+swagger: "2.0"

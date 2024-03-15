@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:16.2
+    user: ${POSTGRES_UID:-1000}:${POSTGRES_GID:-1000}
+    restart: unless-stopped
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    # or set shared memory limit when deploy via swarm stack
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data/pgdata
+    env_file: .env
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+
+  food-orders:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - ${FOOD_ORDERS_PORT:-8080}:8080
+    env_file: .env
+    environment:
+      POSTGRES_HOST: db
+      GIN_RELEASE_MODE: 1

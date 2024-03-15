@@ -1,0 +1,109 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/getNumCalls": {
+            "get": {
+                "description": "Get number of calls",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "calls"
+                ],
+                "summary": "Get number of calls",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/main.Calls"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/incrementNumCalls": {
+            "post": {
+                "description": "Increment number of calls",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "calls"
+                ],
+                "summary": "Increment number of calls",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Company id",
+                        "name": "company",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.Calls"
+                        }
+                    }
+                }
+            }
+        },
+        "/setNumCalls": {
+            "post": {
+                "description": "Set number of calls",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "calls"
+                ],
+                "summary": "Set number of calls",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Company id",
+                        "name": "company",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Number of calls",
+                        "name": "numberOfCalls",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.Calls"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "main.Calls": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "numberOfCalls": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}
